@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-  get 'users/new'
-
-  get 'user/name:string'
+  get 'users/new' => 'users#new'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
