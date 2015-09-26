@@ -1,10 +1,10 @@
 class ProjectsController < ApplicationController
   def index
-  	@projects = Project.all
+    @projects = Project.all
   end
 
   def new
-  	@project = Project.new
+    @project = Project.new
   end
 
   def create
@@ -21,11 +21,11 @@ class ProjectsController < ApplicationController
   end
 
   def show
-  	@project = Project.find(params[:id])
+    @project = Project.find(params[:id])
   end
 
   def edit
-  	@project = Project.find(params[:id])
+    @project = Project.find(params[:id])
   end
 
   def update
@@ -38,6 +38,18 @@ class ProjectsController < ApplicationController
   rescue ActiveRecord::ActiveRecordError
     respond_to do |format|
       format.html { render 'edit' }
+    end
+  end
+
+  def destroy
+    Project.transaction do
+      @project = Project.find(params[:id])
+      @project.destroy!
+    end
+    redirect_to projects_path
+  rescue ActiveRecord::ActiveRecordError
+    respond_to do |format|
+      format.html { render 'show' }
     end
   end
 
