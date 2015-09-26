@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
       @project.owner_id = 1
       @project.save!
     end
-    redirect_to projects_path
+    redirect_to project_path(@project.id)
   rescue ActiveRecord::ActiveRecordError
     respond_to do |format|
       format.html { render 'new' }
@@ -22,6 +22,23 @@ class ProjectsController < ApplicationController
 
   def show
   	@project = Project.find(params[:id])
+  end
+
+  def edit
+  	@project = Project.find(params[:id])
+  end
+
+  def update
+    Project.transaction do
+      @project = Project.find(params[:id])
+      @project.update_attributes(filter_params)
+      @project.save!
+    end
+    redirect_to project_path(@project.id)
+  rescue ActiveRecord::ActiveRecordError
+    respond_to do |format|
+      format.html { render 'edit' }
+    end
   end
 
   private

@@ -1,0 +1,12 @@
+<div class="create">
+  <div class="container">
+    <div class="create-page">
+      <div class="create-info">
+        <h3><%= @project.name %></h3>
+      </div>
+      <div class="update-form">
+        <%= render partial: 'form', locals: { project: @project } %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,7 @@
-<div><%= project.name %></div>
-<div><%= project.owner.name %></div>
-<div><%= project.target_amount %></div>
-<div><%= project.description %></div>
-<div><%= project.deadline %></div>
+<div><%= @project.name %></div>
+<div><%= @project.owner.name %></div>
+<div><%= @project.target_amount %></div>
+<div><%= @project.description %></div>
+<div><%= @project.deadline %></div>
+
+<%= button_to 'EDIT', edit_project_path(@project.id), method: :get %>
