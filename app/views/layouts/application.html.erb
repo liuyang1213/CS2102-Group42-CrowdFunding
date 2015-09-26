@@ -1,14 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CrowdFunding</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
+	<title>CrowdFunding</title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+	<!-- <link href="css/bootstrap.css" rel="stylesheet"> -->
+	<!-- <link href="css/style.css" rel="stylesheet" type="text/css" media="all" /> -->
+	<!-- // <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
+	<!-- // <script src="js/bootstrap.min.js"></script> -->
 </head>
 <body>
 
+
+<!-- header -->
+<div class="header">
+	<div class="container">
+		<div class="logo">
+			<a href="index.html"><%= image_tag 'logo.png' %></a>
+		</div>
+	</div>
+</div>
+<!-- //header -->
+
+<!-- navigation -->
+<div class="navigation">
+	<div class="container">
+		<nav class="navbar navbar-default">
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
+			   <ul class="nav navbar-nav">
+					<li class="active"><a href="index.html">Home <span class="sr-only">(current)</span></a></li>
+					<li><a href="create.html">Create</a></li>					
+					<li><a href="project.html">Project</a></li>
+			  </ul>
+			  		<div class="search">
+						<form>
+						<input type="search" value="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'search';}" required="">
+						<input type="submit" value=" ">
+						</form>
+					</div>
+			  <div class="clearfix"></div>
+			</div><!-- /.navbar-collapse -->
+		</nav>
+	</div>
+</div>
+<!-- //navigation -->
+
 <%= yield %>
 
+<!-- footer -->
+<div class="footer">
+	<div class="container">
+		<p>Copyright &copy; 2015 CS2102 Group42</p>
+	</div>
+</div>
+<!-- footer -->
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+	<!-- js -->
+		 <script src="js/bootstrap.js"></script>
+	<!-- js -->
 </body>
 </html>
