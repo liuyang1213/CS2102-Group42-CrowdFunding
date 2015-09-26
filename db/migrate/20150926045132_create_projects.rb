@@ -6,8 +6,7 @@ class CreateProjects < ActiveRecord::Migration
     	t.datetime :deadline
     	t.integer :target_amount
 
-    	t.integer :owner_id, null: false
-        t.foreign_key :users, column: :owner_id, dependent: :delete
+    	t.integer :owner_id, null: false，references: :user
 
         t.timestamps
     end
