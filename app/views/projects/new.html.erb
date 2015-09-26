@@ -1,2 +1,38 @@
-<h1>Projects#new</h1>
-<p>Find me in app/views/projects/new.html.erb</p>
+<!-- create-page -->
+<div class="create">
+  <div class="container">
+    <div class="create-page">
+      <div class="create-info">
+        <h3>CREATE A PROJECT</h3>
+      </div>
+
+      <div class="create-form">
+        <%= simple_form_for @project do |f| %>
+          <%= f.error_notification %>
+          <p>
+            <%= f.input :name, placeholder: 'Name', label: false %>
+            <%= f.input :deadline, label: false %>
+          </p>
+          <p>
+            <%= f.input :target_amount, placeholder: 'Target Amount', label: false, :as => "string" %>
+          </p>
+          <p>
+            <%= f.input :description, placeholder: 'Description', label: false, :as => "text" %>
+          </p>
+          <%= f.button :submit %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- //create-page -->
+
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- js -->
+<script src="js/bootstrap.js"></script>
+<!-- js -->
+</body>
+</html>
