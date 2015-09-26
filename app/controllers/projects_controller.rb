@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   def index
-  	@project = Project.all
+  	@projects = Project.all
   end
 
   def new
@@ -13,7 +13,6 @@ class ProjectsController < ApplicationController
       @project.owner_id = 1
       @project.save!
     end
-    flash[:success] = 'The project has been created.'
     redirect_to projects_path
   rescue ActiveRecord::ActiveRecordError
     respond_to do |format|
