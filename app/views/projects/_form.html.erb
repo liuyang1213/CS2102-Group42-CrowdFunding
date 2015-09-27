@@ -1,0 +1,14 @@
+<%= simple_form_for project do |f| %>
+  <%= f.error_notification %>
+  <p>
+    <%= f.input :name, placeholder: 'Name', label: false %>
+    <%= f.input :deadline, label: false %>
+  </p>
+  <p>
+    <%= f.input :target_amount, placeholder: 'Target Amount', label: false, as: :string %>
+  </p>
+  <p>
+    <%= f.input :description, placeholder: 'Description', label: false, as: :text %>
+  </p>
+  <%= f.button :submit %>
+<% end %>
