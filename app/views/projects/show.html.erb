@@ -1,8 +1,31 @@
-<div><%= @project.name %></div>
-<div><%= @project.owner.name %></div>
-<div><%= @project.target_amount %></div>
-<div><%= @project.description %></div>
-<div><%= @project.deadline %></div>
+<div class="list-group">
+  		<a href="#" class="list-group-item active">
+    	<h4 class="list-group-item-heading">Name</h4>
+    	<p class="list-group-item-text"><%= @project.name %></p>
+  		</a>
+
+  		<a href="#" class="list-group-item">
+    	<h4 class="list-group-item-heading">Amount</h4>
+    	<p class="list-group-item-text"><%= @project.owner.name %></p>
+  		</a>
+
+
+		<a href="#" class="list-group-item">
+    	<h4 class="list-group-item-heading">Deadline</h4>
+    	<p class="list-group-item-text"><%= @project.target_amount %></p>
+  		</a>
+
+  		<a href="#" class="list-group-item">
+    	<h4 class="list-group-item-heading">Description</h4>
+    	<p class="list-group-item-text"><%= @project.description %></p>
+  		</a>
+
+  		<a href="#" class="list-group-item">
+    	<h4 class="list-group-item-heading">Description</h4>
+    	<p class="list-group-item-text"><%= @project.deadline %></p>
+  		</a>
+</div>
+
 
 <%= button_to 'EDIT', edit_project_path(@project.id), method: :get %>
 <%= button_to 'DELETE', project_path(@project.id), method: :delete %>

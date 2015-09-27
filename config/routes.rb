@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  root 'projects#index'
+  
   get 'users/new' => 'users#new'
   resources :projects
 
-  root 'projects#index'
 
 
   # The priority is based upon order of creation: first created -> highest priority.
