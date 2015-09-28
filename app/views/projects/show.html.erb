@@ -5,13 +5,13 @@
   		</a>
 
   		<a href="#" class="list-group-item">
-    	<p class="list-group-item-heading">Name</p>
+    	<p class="list-group-item-heading">Owner</p>
     	<h4 class="list-group-item-text"><%= @project.owner.name %></h4>
   		</a>
 
 
 		  <a href="#" class="list-group-item">
-    	<p class="list-group-item-heading">Amount</p>
+    	<p class="list-group-item-heading">Target Amount</p>
     	<h4 class="list-group-item-text"><span>$</span><%= @project.target_amount %></h4>
   		</a>
 
@@ -22,10 +22,10 @@
 
   		<a href="#" class="list-group-item">
     	<p class="list-group-item-heading">Deadline</p>
-    	<h4 class="list-group-item-text"><%= @project.deadline %></h4>
+    	<h4 class="list-group-item-text"><%= @project.deadline.strftime('%Y-%m-%d %H:%M') %></h4>
   		</a>
 </div>
 
 
-<%= button_to 'CONTRIBUTE', edit_project_path(@project.id), method: :get,  class: "btn btn-primary btn-lg" %>
+<%= button_to 'EDIT', edit_project_path(@project.id), method: :get,  class: "btn btn-primary btn-lg" %>
 <%= button_to 'DELETE', project_path(@project.id), method: :delete,  class: "btn btn-primary btn-lg disabled"  %>
