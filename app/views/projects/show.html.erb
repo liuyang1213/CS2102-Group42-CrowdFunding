@@ -1,28 +1,28 @@
-<div class="list-group">
+<div class="list-group" style="width:50%; margin:0 auto;">
   		<a href="#" class="list-group-item active">
-    	<h4 class="list-group-item-heading">Name</h4>
-    	<p class="list-group-item-text"><%= @project.name %></p>
+    	<p class="list-group-item-heading">Project</p>
+    	<h4 class="list-group-item-text"><%= @project.name %></h4>
   		</a>
 
   		<a href="#" class="list-group-item">
-    	<h4 class="list-group-item-heading">Amount</h4>
-    	<p class="list-group-item-text"><%= @project.owner.name %></p>
+    	<p class="list-group-item-heading">Name</p>
+    	<h4 class="list-group-item-text"><%= @project.owner.name %></h4>
   		</a>
 
 
-		<a href="#" class="list-group-item">
-    	<h4 class="list-group-item-heading">Deadline</h4>
-    	<p class="list-group-item-text"><%= @project.target_amount %></p>
-  		</a>
-
-  		<a href="#" class="list-group-item">
-    	<h4 class="list-group-item-heading">Description</h4>
-    	<p class="list-group-item-text"><%= @project.description %></p>
+		  <a href="#" class="list-group-item">
+    	<p class="list-group-item-heading">Amount</p>
+    	<h4 class="list-group-item-text"><span>$</span><%= @project.target_amount %></h4>
   		</a>
 
   		<a href="#" class="list-group-item">
-    	<h4 class="list-group-item-heading">Description</h4>
-    	<p class="list-group-item-text"><%= @project.deadline %></p>
+    	<p class="list-group-item-heading">Description</p>
+    	<h4 class="list-group-item-text"><%= @project.description %></h4>
+  		</a>
+
+  		<a href="#" class="list-group-item">
+    	<p class="list-group-item-heading">Deadline</p>
+    	<h4 class="list-group-item-text"><%= @project.deadline %></h4>
   		</a>
 </div>
 

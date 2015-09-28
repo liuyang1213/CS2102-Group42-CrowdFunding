@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  root 'projects#index'
+  root 'projects#home'
   
-  get 'users/new' => 'users#new'
+  get 'explore' => 'projects#index'
+  
   resources :projects
 
 
