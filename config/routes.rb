@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   
   get 'explore' => 'projects#index'
   
+  get 'about' => 'users#about'
   resources :projects
+  resources :users
 
 
 
