@@ -1,10 +1,10 @@
 <% @projects.each do |project| %>
-	<div><h2><%= link_to project.name, project_path(project.id) %><h2></div>
+	<div style="width:50%; margin:0 auto;"><h2><%= link_to project.name, project_path(project.id) %><h2></div>
 
-	<div class="col-xs-6 .col-md-4">
+	<div style="width:50%; margin:0 auto;">
 
 
-	<div class="list-group">
+	<div class="list-group" class=".center">
   		<a href="#" class="list-group-item active">
     	<h4 class="list-group-item-heading">Name</h4>
     	<p class="list-group-item-text"><%= project.owner.name %></p>
