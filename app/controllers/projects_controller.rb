@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
   def create
     Project.transaction do
       @project = Project.new(filter_params)
-      @project.owner_id = 1
+      @project.owner_id = current_user.id
       @project.save!
     end
     redirect_to project_path(@project.id)

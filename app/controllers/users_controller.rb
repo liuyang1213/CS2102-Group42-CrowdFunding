@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  def new
+  def me
+    @user = current_user
+    render "show"
   end
 
   def show
-  end
-
-  def about
+    @user = User.find(params[:id])
   end
 end

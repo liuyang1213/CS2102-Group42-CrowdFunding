@@ -1,0 +1,14 @@
+<div><h2><%= @user.name %></h2></div>
+<div><%= @user.email %></div>
+<h4>Projects</h4>
+<div>
+  <ul>
+    <% if @user.projects %>
+      <% @user.projects.each do |project| %>
+        <li><%= link_to project.name, project_path(project) %></li>
+      <% end %>
+    <% else %>
+      <li>No projects</li>
+    <% end %>
+  </ul>
+</div>

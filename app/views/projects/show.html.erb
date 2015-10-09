@@ -26,6 +26,7 @@
   		</a>
 </div>
 
-
-<%= button_to 'EDIT', edit_project_path(@project.id), method: :get,  class: "btn btn-primary btn-lg" %>
-<%= button_to 'DELETE', project_path(@project.id), method: :delete,  class: "btn btn-primary btn-lg disabled"  %>
+<% if @project.owner == current_user %>
+  <%= button_to 'EDIT', edit_project_path(@project.id), method: :get, class: "btn btn-primary btn-lg" %>
+  <%= button_to 'DELETE', project_path(@project.id), method: :delete, class: "btn btn-danger btn-lg"  %>
+<% end %>

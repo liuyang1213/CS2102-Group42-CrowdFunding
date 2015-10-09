@@ -6,26 +6,26 @@
 
 	<div class="list-group" class=".center">
   		
-      <a href="#" class="list-group-item active">
-    	<span class="list-group-item-heading">Owner</span>
-    	<h4 class="list-group-item-text"><%= project.owner.name %></h4>
-  		</a>
+      <div class="list-group-item active">
+      	<span class="list-group-item-heading">Owner</span>
+      	<h4 class="list-group-item-text"><%= link_to project.owner.name, user_profile_path(project.owner), class: "list-group-item-text" %></h4>
+  		</div>
 
-  		<a href="#" class="list-group-item">
-    	<p class="list-group-item-heading">Amount</p>
-    	<h4 class="list-group-item-text"><%= project.target_amount %></h4>
-  		</a>
+  		<div class="list-group-item">
+      	<p class="list-group-item-heading">Taget Amount</p>
+      	<h4 class="list-group-item-text"><%= project.target_amount %></h4>
+  		</div>
 
 
-		  <a href="#" class="list-group-item">
-    	<p class="list-group-item-heading">Deadline</p>
-    	<h4 class="list-group-item-text"><%= project.deadline %><h4>
-  		</a>
+		  <div class="list-group-item">
+      	<p class="list-group-item-heading">Deadline</p>
+      	<h4 class="list-group-item-text"><%= project.deadline %><h4>
+  		</div>
 
-  		<a href="#" class="list-group-item">
-    	<p class="list-group-item-heading">Description</p>
-    	<h4 class="list-group-item-text"><%= project.description %></h4>
-  		</a>
+  		<div class="list-group-item">
+      	<p class="list-group-item-heading">Description</p>
+      	<h4 class="list-group-item-text"><%= project.description %></h4>
+  		</div>
 	</div>
 
 

@@ -1,9 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  get '/users/me', to: 'users#me'
+  get '/users/:id', to: 'users#show', as: :user_profile
+
   root 'projects#home'
-  
+
   get 'explore' => 'projects#index'
-  
+
   get 'about' => 'users#about'
   resources :projects
 
