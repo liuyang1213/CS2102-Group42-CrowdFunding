@@ -2,29 +2,28 @@
 <div><%= @user.email %></div>
 <div>
 	<h4>Projects</h4>
-  <ul>
+  <div>
     <% if @user.projects %>
       <% @user.projects.each do |project| %>
-        <li><%= link_to project.name, project_path(project) %></li>
+        <div><%= link_to project.name, project_path(project) %></div>
       <% end %>
     <% else %>
-      <li>No projects</li>
+      <div>No projects</div>
     <% end %>
-  </ul>
+  </div>
 </div>
 
 <div>
 	<h4>Fundings</h4>
-  <ul>
+  <div>
     <% if @user.fundings %>
       <% @user.fundings.each do |funding| %>
-        <li>
-        	<%= link_to funding.project.name, project_path(funding.project) %>
-        	<%= funding.amount %>
-        </li>
+        <div>
+        	Funded <%= link_to funding.project.name, project_path(funding.project) %> for $<%= funding.amount %> at <%= display_time(funding.created_at) %> 
+        </div>
       <% end %>
     <% else %>
-      <li>No fundings</li>
+      <div>No fundings</div>
     <% end %>
-  </ul>
+  </div>
 </div>

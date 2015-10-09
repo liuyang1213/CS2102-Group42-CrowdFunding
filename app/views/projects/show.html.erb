@@ -27,7 +27,7 @@
 
   <a href="#" class="list-group-item">
     <p class="list-group-item-heading">Deadline</p>
-    <h4 class="list-group-item-text"><%= @project.deadline.strftime('%Y-%m-%d %H:%M') %></h4>
+    <h4 class="list-group-item-text"><%= display_time(@project.deadline) %></h4>
   </a>
 </div>
 
