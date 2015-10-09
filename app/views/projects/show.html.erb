@@ -31,6 +31,23 @@
   </a>
 </div>
 
+
+<div>
+  <h4>Fundings</h4>
+  <ul>
+    <% if @project.fundings.any? %>
+      <% @project.fundings.each do |funding| %>
+        <li>
+          <%= link_to funding.user, user_profile_path(funding.user) %>
+          <%= funding.amount %>
+        </li>
+      <% end %>
+    <% else %>
+      <li>No fundings</li>
+    <% end %>
+  </ul>
+</div>
+
 <%= simple_form_for @funding, url: project_funding_path do |f| %>
   <%= f.error_notification %>
 

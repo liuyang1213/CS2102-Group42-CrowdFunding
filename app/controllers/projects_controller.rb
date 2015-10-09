@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
-    @funding = @project.fundings.new
+    @funding = Funding.new
   end
 
   def edit
@@ -73,9 +73,12 @@ class ProjectsController < ApplicationController
   end
 
   private
+
   def filter_params
     return nil unless params[:project]
-    params.require(:project).permit([:name, :description, :deadline, :target_amount])
+    params
+      .require(:project)
+      .permit([:name, :description, :deadline, :target_amount])
   end
 
   def filter_funding_params
