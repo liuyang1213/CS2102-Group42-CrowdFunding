@@ -31,21 +31,20 @@
   </a>
 </div>
 
+<h4>Current Amount: <%= @project.current_amount %></h4>
 
 <div>
   <h4>Fundings</h4>
-  <ul>
-    <% if @project.fundings.any? %>
-      <% @project.fundings.each do |funding| %>
-        <li>
-          <%= link_to funding.user, user_profile_path(funding.user) %>
-          <%= funding.amount %>
-        </li>
-      <% end %>
-    <% else %>
-      <li>No fundings</li>
+  <% if @project.fundings.any? %>
+    <% @project.fundings.each do |funding| %>
+      <div>
+        <%= link_to funding.user.name, user_profile_path(funding.user) %>
+        <%= funding.amount %>
+      </div>
     <% end %>
-  </ul>
+  <% else %>
+    <div>No fundings now</div>
+  <% end %>
 </div>
 
 <%= simple_form_for @funding, url: project_funding_path do |f| %>

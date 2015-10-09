@@ -5,4 +5,8 @@ class Project < ActiveRecord::Base
   validates :target_amount, numericality: { only_integer: true,
                                             allow_blank: true,
                                             greater_than: 0 }
+
+  def current_amount
+    fundings.sum(:amount)
+  end
 end
