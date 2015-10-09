@@ -25,6 +25,7 @@ class ProjectsController < ApplicationController
 
   def show
     @project = Project.find(params[:id])
+    @funding = @project.fundings.new
   end
 
   def edit
@@ -56,9 +57,29 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def create_funding
+    Funding.transaction do
+      @project = Project.find(params[:id])
+      @funding = Funding.new(filter_funding_params)
+      @funding.user = current_user
+      @funding.project = @project
+      @funding.save!
+    end
+    redirect_to project_path(@project)
+  rescue ActiveRecord::ActiveRecordError
+    respond_to do |format|
+      format.html { render 'show' }
+    end
+  end
+
   private
   def filter_params
     return nil unless params[:project]
     params.require(:project).permit([:name, :description, :deadline, :target_amount])
+  end
+
+  def filter_funding_params
+    return nil unless params[:funding]
+    params.require(:funding).permit([:amount])
   end
 end

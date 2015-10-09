@@ -1,16 +1,15 @@
 Rails.application.routes.draw do
+  root 'projects#home'
+
   devise_for :users
 
   get '/users/me', to: 'users#me'
   get '/users/:id', to: 'users#show', as: :user_profile
-
-  root 'projects#home'
-
-  get 'explore' => 'projects#index'
-
   get 'about' => 'users#about'
-  resources :projects
 
+  resources :projects
+  get 'explore' => 'projects#index'
+  post '/projects/:id/fundings', to: 'projects#create_funding', as: :project_funding
 
 
   # The priority is based upon order of creation: first created -> highest priority.
