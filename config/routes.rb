@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   
   get 'about' => 'users#about'
   resources :projects
-  resources :users
 
 
 
