@@ -6,7 +6,15 @@ class Project < ActiveRecord::Base
                                             allow_blank: true,
                                             greater_than: 0 }
 
+  scope :order_by_date, (lambda do
+    order('created_at desc')
+  end)
+
   def current_amount
     fundings.sum(:amount)
+  end
+
+  def open?
+    Time.new < deadline
   end
 end

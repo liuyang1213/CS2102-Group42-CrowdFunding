@@ -482,3 +482,15 @@ select {
 input#search-input {
   margin: 0;
 }
+
+.panel-body span {
+  font-weight: bold;
+}
+
+div.project-list-title {
+  font-size: 20px;
+}
+
+div.operation-groups {
+  margin-bottom: 5px;
+}

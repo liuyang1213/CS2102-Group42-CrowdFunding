@@ -1,55 +1,93 @@
 <% if @project.owner == current_user %>
-  <%= button_to 'EDIT', edit_project_path(@project.id), method: :get, class: "btn btn-primary btn-lg" %>
-  <%= button_to 'DELETE', project_path(@project.id), method: :delete, class: "btn btn-danger btn-lg"  %>
+  <div class="operation-groups">
+    <%= link_to edit_project_path(@project.id), class: "btn btn-primary" do %>
+      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+      EDIT
+    <% end %>
+
+    <% if @project.fundings.empty? %>
+      <%= link_to project_path(@project.id), 
+          method: :delete, 
+          data: {confirm: "Are you sure to delete this project?"},
+          class: "btn btn-danger" do %>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        DELETE
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
 
-<div class="list-group" style="width:50%; margin:0 auto;">
-  <div href="#" class="list-group-item active">
-    <p class="list-group-item-heading">Project</p>
-    <h4 class="list-group-item-text"><%= @project.name %></h4>
-  </div>
+<div class="thumbnail">
+  <div class="caption">
+    <%= @project.name %>
+    <div>
+      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      <%= link_to @project.owner.name, user_profile_path(@project.owner) %>
+    </div>
 
-  <div href="#" class="list-group-item">
-    <p class="list-group-item-heading">Owner</p>
-    <h4 class="list-group-item-text"><%= @project.owner.name %></h4>
-  </div>
+    <div>
+      <span>Current Fundings:</span>
+      $<%= @project.current_amount %>
+    </div>
 
-  <div href="#" class="list-group-item">
-    <p class="list-group-item-heading">Target Amount</p>
-    <h4 class="list-group-item-text"><span>$</span><%= @project.target_amount %></h4>
-  </div>
+    <% if @project.target_amount.present? %>
+      <div>
+        <span>Taget Amount:</span>
+        $<%= @project.target_amount %>
+      </div>
+    <% end %>
 
-  <div href="#" class="list-group-item">
-    <p class="list-group-item-heading">Description</p>
-    <h4 class="list-group-item-text"><%= @project.description %></h4>
-  </div>
+    <% if @project.deadline.present? %>
+      <div>
+        <span>Closing Date:</span>
+        <%= display_time(@project.deadline) %>
+      </div>
+    <% end %>
 
-  <div class="list-group-item">
-    <p class="list-group-item-heading">Deadline</p>
-    <h4 class="list-group-item-text"><%= display_time(@project.deadline) %></h4>
+    <% if @project.description.present? %>
+      <div>
+        <span>Description:</span>
+        <%= @project.description %>
+      </div>
+    <% end %>
+
+    <div>
+      <span>Created at</span>
+      <%= display_time(@project.created_at) %>
+      <span>Latest updated at</span>
+      <%= display_time(@project.updated_at) %>
+    </div>
   </div>
 </div>
 
-<h4>Current Amount: <%= @project.current_amount %></h4>
+<div class="list-group">
+  <div class="list-group-item active">
+    <p class="list-group-item-heading">Fundings</p>
+  </div>
 
-<div>
-  <h4>Fundings</h4>
   <% if @project.fundings.any? %>
     <% @project.fundings.each do |funding| %>
-      <div>
-        <%= link_to funding.user.name, user_profile_path(funding.user) %>
-        <%= funding.amount %>
+      <div class="list-group-item">
+        <%= link_to funding.user.name, user_profile_path(funding.user) %> funded $<%= funding.amount %> at <%= display_time(funding.created_at) %>
       </div>
     <% end %>
   <% else %>
-    <div>No fundings now</div>
+    <div class="list-group-item">No fundings now</div>
   <% end %>
 </div>
 
-<%= simple_form_for @funding, url: project_funding_path do |f| %>
-  <%= f.error_notification %>
+<% if @project.open? %>
+  <div class="panel panel-primary">  
+    <div class="panel-body">
+      <%= simple_form_for @funding, url: project_funding_path do |f| %>
+        <%= f.error_notification %>
 
-  <%= f.input :amount, placeholder: 'Amount', label: false, as: :string %>
+        <%= f.input :amount, placeholder: 'Amount', label: false, as: :string %>
 
-  <%= f.button :submit, "Fund", class: 'btn btn-primary' %>
+        <%= f.button :submit, "Fund", class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <h2>This project has been closed.</h2>
 <% end %>
