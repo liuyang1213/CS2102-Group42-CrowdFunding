@@ -478,3 +478,7 @@ select {
 .project_deadline {
   margin-bottom: 20px;
 }
+
+input#search-input {
+  margin: 0;
+}
