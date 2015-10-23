@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate_user!, except: [:home, :index, :show]
+
   def home
   end
 
@@ -30,11 +32,13 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
+    only_allow_owner
   end
 
   def update
+    @project = Project.find(params[:id])
+    only_allow_owner
     Project.transaction do
-      @project = Project.find(params[:id])
       @project.update_attributes(filter_params)
       @project.save!
     end
@@ -46,8 +50,9 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    @project = Project.find(params[:id])
+    only_allow_owner
     Project.transaction do
-      @project = Project.find(params[:id])
       @project.destroy!
     end
     redirect_to projects_path
@@ -84,5 +89,10 @@ class ProjectsController < ApplicationController
   def filter_funding_params
     return nil unless params[:funding]
     params.require(:funding).permit([:amount])
+  end
+
+  def only_allow_owner
+    return if @project && @project.owner_id == current_user.id
+    render template: 'shared/forbidden'
   end
 end

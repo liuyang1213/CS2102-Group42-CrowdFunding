@@ -8,4 +8,8 @@ class User < ActiveRecord::Base
   validates :name, presence: true, length: { maximum: 50 },
                    uniqueness: { case_sensitive: false }
   validates :password, presence: true, length: { minimum: 6 }
+
+  def total_funding
+    fundings.sum(:amount)
+  end
 end
