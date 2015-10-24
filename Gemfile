@@ -31,7 +31,7 @@ gem 'bootstrap-sass', '~> 3.3.5'
 
 gem 'devise'
 
-
+gem 'google-webfonts-rails'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
