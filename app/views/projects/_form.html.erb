@@ -1,10 +1,11 @@
-<%= simple_form_for @project do |f| %>
+<%= simple_form_for @project, 
+    defaults: {required: false} do |f| %>
   <%= f.error_notification %>
 
-  <%= f.input :name, placeholder: 'Name', label: false %>
-  <%= f.input :deadline, label: false %>
-  <%= f.input :target_amount, placeholder: 'Target Amount', label: false, as: :string %>
-  <%= f.input :description, placeholder: 'Description', label: false, as: :text %>
+  <%= f.input :name %>
+  <%= f.input :deadline %>
+  <%= f.input :target_amount, as: :string %>
+  <%= f.input :description, as: :text %>
 
   <%= f.button :submit, class: 'btn btn-primary' %>
 <% end %>

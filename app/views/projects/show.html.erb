@@ -87,7 +87,9 @@
 </div>
 
 <% if @project.open? %>
-  <%= simple_form_for @funding, url: project_funding_path, html: { novalidate: true } do |f| %>
+  <%= simple_form_for @funding, 
+      url: project_funding_path, 
+      defaults: {required: false} do |f| %>
     <%= f.error_notification %>
 
     <%= f.input :amount, placeholder: 'Amount', label: false, as: :string %>
