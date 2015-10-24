@@ -1,4 +1,5 @@
 <% @projects.each do |project| %>
+  <% current_amount = project.current_amount %>
   <div class="thumbnail">  
     <div class="caption">
       <div class="project-list-title">
@@ -11,8 +12,11 @@
       </div>
 
       <div>
-        <span>Current Fundings:</span>
-        $<%= project.current_amount %>
+        $<%= current_amount %> PLEDGED
+      </div>
+
+      <div>
+        <%= project.uniq_funders.length %> PLEDGERS
       </div>
 
       <% if project.target_amount.present? %>
@@ -20,12 +24,25 @@
           <span>Taget Amount:</span>
           $<%= project.target_amount %>
         </div>
+
+        <% progress = current_amount > project.target_amount ? 100 : current_amount.to_f / project.target_amount * 100 %>
+        <div class="progress">
+          <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="<%= "width: #{progress}%" %>">
+            <%= progress %>%
+          </div>
+        </div>
       <% end %>
 
-      <% if project.deadline.present? %>
+      <% if project.open? %>
+        <% if project.deadline.present? %>
+          <div>
+            <% days_remaining = (project.deadline - Time.zone.now).to_i / 1.day %>
+            <%= days_remaining %> DAYS TO GO
+          </div>
+        <% end %>
+      <% else %>
         <div>
-          <span>Closing Date:</span>
-          <%= display_time(project.deadline) %>
+          CLOSED 
         </div>
       <% end %>
 
