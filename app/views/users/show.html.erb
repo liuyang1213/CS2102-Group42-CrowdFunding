@@ -1,30 +1,46 @@
-<div><h2><%= @user.name %></h2></div>
-<div><%= @user.email %></div>
-<div><h3>Total Funding: <%= @user.total_funding %></h3></div>
-<div>
-	<h4>Projects</h4>
-  <div>
-    <% if @user.projects.present? %>
-      <% @user.projects.each do |project| %>
-        <div><%= link_to project.name, project_path(project) %></div>
-      <% end %>
-    <% else %>
-      <div>No projects</div>
-    <% end %>
+<div class="list-group">
+  <div class="list-group-item list-group-item-info">
+    User information
+  </div>
+  <div class="list-group-item">
+    Name: <%= @user.name %>
+  </div>
+  <div class="list-group-item">
+    Email: <%= @user.email %>
   </div>
 </div>
 
-<div>
-	<h4>Fundings</h4>
-  <div>
-    <% if @user.fundings.present? %>
-      <% @user.fundings.each do |funding| %>
-        <div>
-        	Funded <%= link_to funding.project.name, project_path(funding.project) %> for $<%= funding.amount %> at <%= display_time(funding.created_at) %> 
-        </div>
-      <% end %>
-    <% else %>
-      <div>No fundings</div>
-    <% end %>
+<div class="list-group">
+  <div class="list-group-item list-group-item-info">
+    Projects
   </div>
+
+  <% if @user.projects.any? %>
+    <% @user.projects.each do |project| %>
+      <div class="list-group-item">
+        <%= link_to project.name, project_path(project) %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="list-group-item">No project now</div>
+  <% end %>
+</div>
+
+<div class="list-group">
+  <div class="list-group-item list-group-item-info">
+    Fundings
+  </div>
+
+  <% if @user.fundings.any? %>
+    <% @user.fundings.each do |funding| %>
+      <div class="list-group-item">
+        Funded <%= link_to funding.project.name, project_path(funding.project) %> for $<%= funding.amount %> at <%= display_time(funding.created_at)%> 
+      </div>
+    <% end %>
+    <div class="list-group-item">
+        Total Funding: <%= @user.total_funding %>
+    </div> 
+  <% else %>
+    <div class="list-group-item">No fundings now</div>
+  <% end %>
 </div>
