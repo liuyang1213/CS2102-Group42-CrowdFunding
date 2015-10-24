@@ -1,5 +1,12 @@
+h1 {
+  font-family: "Roboto Slab";
+}
+
+body {
+  font-family: 'Roboto'
+}
+
 body{
-	font-family: 'Open Sans', sans-serif;
 	margin:0;
 	padding:0;
 	background:#fff;
@@ -487,7 +494,8 @@ input#search-input {
 }
 
 div.project-list-title {
-  font-size: 20px;
+  text-overflow: ellipsis;
+  font-size: 30px;
 }
 
 div.operation-groups {

@@ -28,3 +28,66 @@ div#cover-explore-btn {
     height: 60px;
   }
 }
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto Slab";
+}
+
+body {
+  font-family: 'Roboto'
+}
+
+.project-card {
+  font-size: 0;
+
+  .inline {
+    margin: 5px 5px 5px 0;
+    padding: 0 5px;
+    vertical-align: top;
+    display: inline-block;
+    width: 110px;
+    height: 110px;
+    font-size: 14px;
+    background-color: #F8F8F8;
+  }
+
+  .card-large {
+    color: #660000;
+    font-size: 30px;
+  }
+
+  .card-closed {
+    color: #660000;
+    font-size: 20px;
+    vertical-align: middle;
+    margin-top: 40px;
+    text-align: center;
+  }
+}
+
+.progress {
+  margin-top: 20px;
+}
+
+div.project-item {
+  width: 33%;
+  display: inline-block;
+}
+
+.project-item-date {
+  font-style: italic;
+  font-size: 12px;
+}
+
+.project-item-button {
+  margin: 5px 0 5px 0;
+}
+
+div.project-list-title {
+  a {
+      display: block;
+      overflow: hidden;
+      font-size: 30px;
+      max-width: 100%;
+  }
+}
