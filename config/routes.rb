@@ -4,12 +4,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/users/:id', to: 'users#show', as: :user_profile
-  get 'about' => 'users#about'
 
   resources :projects
   get 'explore' => 'projects#index'
   post '/projects/:id/fundings', to: 'projects#create_funding', as: :project_funding
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,6 +1,10 @@
+<div class="page-header">
+  <h1><%= @user.name %>'s Profile</h1>
+</div>
+
 <div class="list-group">
   <div class="list-group-item list-group-item-info">
-    User information
+    Basic Information
   </div>
   <div class="list-group-item">
     Name: <%= @user.name %>
@@ -12,7 +16,7 @@
 
 <div class="list-group">
   <div class="list-group-item list-group-item-info">
-    Projects
+    Own Projects
   </div>
 
   <% if @user.projects.any? %>
@@ -28,7 +32,7 @@
 
 <div class="list-group">
   <div class="list-group-item list-group-item-info">
-    Fundings
+    Funding History
   </div>
 
   <% if @user.fundings.any? %>
