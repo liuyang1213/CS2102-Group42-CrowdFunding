@@ -1,5 +1,7 @@
 <% @projects.each do |project| %>
   <% current_amount = project.current_amount %>
+  <% target_amount = project.target_amount %>
+  <% progress = (current_amount > target_amount ? 100 : current_amount.to_f / target_amount * 100).round(0) %>
   <div class="thumbnail">  
     <div class="caption">
       <div class="project-list-title">
@@ -8,43 +10,38 @@
 
       <div>
         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-        <%= link_to project.owner.name, user_profile_path(project.owner) %>
+        By <%= link_to project.owner.name, user_profile_path(project.owner) %>
       </div>
 
       <div>
-        $<%= current_amount %> PLEDGED
+        $<%= current_amount %> PLEDGED OF $<%= target_amount %> GOAL
       </div>
 
       <div>
         <%= project.uniq_funders.length %> PLEDGERS
       </div>
 
-      <% if project.target_amount.present? %>
-        <div>
-          <span>Taget Amount:</span>
-          $<%= project.target_amount %>
-        </div>
-
-        <% progress = current_amount > project.target_amount ? 100 : current_amount.to_f / project.target_amount * 100 %>
-        <div class="progress">
-          <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="<%= "width: #{progress}%" %>">
-            <%= progress %>%
-          </div>
-        </div>
-      <% end %>
+      <div>
+        <span>Taget Amount:</span>
+        $<%= project.target_amount %>
+      </div>
 
       <% if project.open? %>
-        <% if project.deadline.present? %>
-          <div>
-            <% days_remaining = (project.deadline - Time.zone.now).to_i / 1.day %>
-            <%= days_remaining %> DAYS TO GO
-          </div>
-        <% end %>
+        <div>
+          <% days_remaining = (project.deadline - Time.zone.now).to_i / 1.day %>
+          <%= days_remaining %> DAYS TO GO
+        </div>
       <% else %>
         <div>
           CLOSED 
         </div>
       <% end %>
+
+      <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="<%= "width: #{progress}%" %>">
+          <%= progress %>%
+        </div>
+      </div>
 
       <% if project.description.present? %>
         <div>

@@ -1,3 +1,7 @@
+<% current_amount = @project.current_amount %>
+<% target_amount = @project.target_amount %>
+<% progress = (current_amount > target_amount ? 100 : current_amount.to_f / target_amount * 100).round(0) %>
+
 <% if @project.owner == current_user %>
   <div class="operation-groups">
     <%= link_to edit_project_path(@project.id), class: "btn btn-primary" do %>
@@ -17,30 +21,36 @@
   </div>
 <% end %>
 
+<div class="progress">
+  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="<%= "width: #{progress}%" %>">
+    <%= progress %>%
+  </div>
+</div>
+
 <div class="thumbnail">
   <div class="caption">
     <%= @project.name %>
     <div>
       <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-      <%= link_to @project.owner.name, user_profile_path(@project.owner) %>
+      By <%= link_to @project.owner.name, user_profile_path(@project.owner) %>
     </div>
 
     <div>
-      <span>Current Fundings:</span>
-      $<%= @project.current_amount %>
+      $<%= current_amount %> PLEDGED OF $<%= target_amount %> GOAL
     </div>
 
-    <% if @project.target_amount.present? %>
-      <div>
-        <span>Taget Amount:</span>
-        $<%= @project.target_amount %>
-      </div>
-    <% end %>
+    <div>
+      <%= @project.uniq_funders.length %> PLEDGERS
+    </div>
 
-    <% if @project.deadline.present? %>
+    <% if @project.open? %>
       <div>
-        <span>Closing Date:</span>
-        <%= display_time(@project.deadline) %>
+        <% days_remaining = (@project.deadline - Time.zone.now).to_i / 1.day %>
+        <%= days_remaining %> DAYS TO GO
+      </div>
+    <% else %>
+      <div>
+        CLOSED 
       </div>
     <% end %>
 
