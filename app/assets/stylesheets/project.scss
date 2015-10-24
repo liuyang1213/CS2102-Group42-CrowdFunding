@@ -1,3 +1,29 @@
 // Place all the styles related to the Project controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div#cover {
+  width: 100%;
+  height: 650px;
+  background-image: image-url("cover.jpg")
+}
+
+div#title {
+  padding-top: 150px;
+
+  h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 6em;
+  }
+}
+
+div#cover-explore-btn {
+  text-align: center;
+  input {
+    margin-top: 50px;
+    font-size: 2em;
+    width: 200px;
+    height: 60px;
+  }
+}

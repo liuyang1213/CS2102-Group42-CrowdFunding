@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_filter :authenticate_user!, except: [:home, :index, :show]
 
   def home
+    render layout: false
   end
 
   def index

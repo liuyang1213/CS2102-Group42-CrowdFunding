@@ -455,7 +455,6 @@ margin:0 0 50px 0;
 	z-index: 100;
 }
 .nbs-flexisel-nav-left {
-  background: transparent url("../images/themes1.png") no-repeat 0px 0px;
   left: -3.5%;
   top: 12% !important;
 }
@@ -518,4 +517,8 @@ input#funding-submit {
   vertical-align: top;
   height: 80px;
   border-radius: 0 4px 4px 0;
+}
+
+div.header {
+  margin: 0;
 }

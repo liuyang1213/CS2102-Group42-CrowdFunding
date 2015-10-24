@@ -1,3 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CrowdFunding</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body>
+
+<div id="cover">
+  <div id="title">
+    <h1>CROWD FUNDING</h1>
+  </div>
+  <div id="cover-explore-btn" class="row">
+    <%= button_to "Explore", 
+        explore_path, 
+        method: :get,
+        class: "btn btn-warning btn-lg" %>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-sm-4 col-md-4">
     <div class="thumbnail">
@@ -42,3 +65,7 @@
     </div>
   </div>
 </div>
+
+</body>
+</html>
+
