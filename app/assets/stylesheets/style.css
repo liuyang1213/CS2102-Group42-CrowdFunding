@@ -530,3 +530,7 @@ input#funding-submit {
 div.header {
   margin: 0;
 }
+
+body {
+  background-image: image-url("cover.jpg");
+}
