@@ -10,13 +10,16 @@
   <% end %>
 
   <div class='form-inputs'>
-    <%= f.input :email, required: true, autofocus: true, placeholder: 'Email', label: false %>
-    <%= f.input :name, required: true, placeholder: 'Name', label: false %>
-    <%= f.input :password, required: true, placeholder: 'Password', label: false %>
-    <%= f.input :password_confirmation, required: true, placeholder: 'Password Confirmation', label: false %>
+    <%= f.input :email, autofocus: true, placeholder: 'Email', label: false %>
+    <%= f.input :name, placeholder: 'Name', label: false %>
+    <%= f.input :password, placeholder: 'Password', label: false %>
+    <%= f.input :password_confirmation, placeholder: 'Password Confirmation', label: false %>
   </div>
 
   <div class='form-actions'>
     <%= f.button :submit, "Sign up", class: 'btn btn-warning' %>
   </div>
+  
+  <%= render "devise/shared/links" %>
 <% end %>
+

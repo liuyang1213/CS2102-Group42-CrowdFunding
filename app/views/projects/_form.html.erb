@@ -1,5 +1,5 @@
 <%= simple_form_for @project, 
-    defaults: {required: false},
+    defaults: { required: false },
     html: { class: "project-form" } do |f| %>
   <% if @project.errors.any? %>
     <div class="alert alert-danger">
@@ -7,7 +7,7 @@
     </div>
   <% end %>
 
-  <%= f.input :name %>
+  <%= f.input :name, autofocus: true %>
   <%= f.input :deadline,
   						label: 'Close Date',
               as: :date %>

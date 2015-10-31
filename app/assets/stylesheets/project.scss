@@ -159,6 +159,12 @@ ul.funding-errors {
   text-decoration: underline;
 }
 
+input[type="text"] {
+  border: 1px solid #a8a8a8;
+  outline: none;
+  padding: 5px;
+}
+
 form.project-form, form#new_user {
   input[type="text"], input[type="email"], input[type="password"], select {
     border: 1px solid #a8a8a8;
@@ -220,7 +226,6 @@ form#new_user {
   }
 }
 
-.signup-header {
-  margin: auto !important;
+.shared-links {
+  margin: auto;
 }
-
