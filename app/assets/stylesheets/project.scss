@@ -159,7 +159,14 @@ ul.funding-errors {
   text-decoration: underline;
 }
 
-form.project-form {
+form.project-form, form#new_user {
+  input[type="text"], input[type="email"], input[type="password"], select {
+    border: 1px solid #a8a8a8;
+    outline: none;
+    padding: 5px;
+    font-size: 14px;
+  }
+
   .field_with_errors {
     input, select {
       border: 1px solid #D00000;
@@ -174,37 +181,46 @@ form.project-form {
     width: 110px;
   }
 
-  input[type="text"] {
+  input[type="text"], input[type="email"], input[type="password"] {
     width: 60%;
   }
 
   .button {
     margin-top: 10px;
   }
+
+  textarea {
+    border: 1px solid #a8a8a8;
+    width: 95%;
+    height: 150px;
+    outline: none;
+
+    font-size: 14px;
+    color: #d44202;
+    resize: none;
+    padding: 10px;
+    margin-bottom: 24px;
+  }
+
+  .input {
+    margin: 0 5px 20px 0;
+  }
 }
 
-input[type="text"], input[type="email"], input[type="password"], select {
-  border: 1px solid #a8a8a8;
-  outline: none;
-  padding: 5px;
-  font-size: 14px;
+form#new_user {
+  text-align: center;
 
-  margin: 0 5px 20px 0;
+  span.error {
+    display: block;
+  }
+
+  .user-error {
+    width: 60%;
+    margin: 0 auto 20px auto;
+  }
 }
 
-textarea {
-  border: 1px solid #a8a8a8;
-  width: 95%;
-  height: 150px;
-  outline: none;
-
-  font-size: 14px;
-  color: #d44202;
-  resize: none;
-  padding: 10px;
-  margin-bottom: 24px;
-}
-.create-form input[type="text"]:nth-child(3){
-margin-right:0;
+.signup-header {
+  margin: auto !important;
 }
 
