@@ -33,6 +33,8 @@ gem 'devise'
 
 gem 'google-webfonts-rails'
 
+gem 'validates_timeliness'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

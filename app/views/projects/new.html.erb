@@ -1,12 +1,8 @@
 <div class="create">
   <div class="container">
-    <div class="create-page">
-      <div class="create-info">
-        <h3>CREATE A PROJECT</h3>
-      </div>
-      <div class="create-form">
-        <%= render partial: 'form', locals: { project: @project } %>
-      </div>
+    <div class="page-header">
+      <h1>Create a Project</h1>
     </div>
+    <%= render partial: 'form', locals: { project: @project } %>
   </div>
 </div>

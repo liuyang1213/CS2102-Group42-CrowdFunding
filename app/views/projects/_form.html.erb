@@ -1,11 +1,18 @@
 <%= simple_form_for @project, 
-    defaults: {required: false} do |f| %>
-  <%= f.error_notification %>
+    defaults: {required: false},
+    html: { class: "project-form" } do |f| %>
+  <% if @project.errors.any? %>
+    <div class="alert alert-danger">
+      Please view the errors below:
+    </div>
+  <% end %>
 
   <%= f.input :name %>
-  <%= f.input :deadline %>
+  <%= f.input :deadline,
+  						label: 'Close Date',
+              as: :date %>
   <%= f.input :target_amount, as: :string %>
   <%= f.input :description, as: :text %>
 
-  <%= f.button :submit, class: 'btn btn-primary' %>
+  <%= f.button :submit, class: 'btn btn-warning' %>
 <% end %>
