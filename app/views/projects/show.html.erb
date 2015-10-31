@@ -1,105 +1,118 @@
 <div class="page-header">
   <h1><%= @project.name %></h1>
-</div>
+  <% if @project.owner == current_user %>
+    <div class="operation-groups row">
+      <%= link_to edit_project_path(@project.id), class: "btn btn-primary" do %>
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        EDIT
+      <% end %>
 
-<div>
-  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-  By <%= link_to @project.owner.name, user_profile_path(@project.owner) %>
+      <% if @project.fundings.empty? %>
+        <%= link_to project_path(@project.id), 
+            method: :delete, 
+            data: {confirm: "Are you sure to delete this project?"},
+            class: "btn btn-danger" do %>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          DELETE
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
 </div>
 
 <% current_amount = @project.current_amount %>
 <% target_amount = @project.target_amount %>
 <% progress = (current_amount > target_amount ? 100 : current_amount.to_f / target_amount * 100).round(0) %>
 
-<div class="progress">
-  <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="<%= "width: #{progress}%" %>">
-    <%= progress %>%
+<div class="sidebar col-lg-4 col-md-4 col-sm-4 col-xs-12">
+  <div class="thumbnail">
+    <div class="caption">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="<%= "width: #{progress}%" %>">
+          <%= progress %>%
+        </div>
+      </div>
+
+      <div class="well well-sm">
+        <div>
+          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+          By <%= link_to @project.owner.name, user_profile_path(@project.owner) %>
+        </div>
+
+        <div>
+          <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+          Created at <%= display_time(@project.created_at) %>
+        </div>
+
+        <div>
+          <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+          Updated at <%= display_time(@project.updated_at) %>
+        </div>
+      </div>
+
+      <div class="well well-sm">
+        <div>
+          <span class="important">$<%= current_amount %></span> pledged of <span class="important">$<%= target_amount %></span> goal
+        </div>
+
+        <div>
+          <span class="important"><%= @project.uniq_funders.length %></span>  pledgers
+        </div>
+
+        <% if @project.open? %>
+          <div>
+            <% days_remaining = (@project.deadline - Time.zone.now).to_i / 1.day %>
+            <span class="important"><%= days_remaining %></span> days to go
+          </div>
+        <% else %>
+          Closed on <span class="important"><%= display_time(@project.deadline) %></span>
+        <% end %>
+      </div>
+
+      <div class="well well-sm">
+        <div class="important">Description:</div>
+        <% if @project.description.present? %>
+          <%= @project.description %>
+        <% else %>
+          This project has no description.
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="thumbnail">
-  <div class="caption">
-
-    <div>
-      $<%= current_amount %> PLEDGED OF $<%= target_amount %> GOAL
-    </div>
-
-    <div>
-      <%= @project.uniq_funders.length %> PLEDGERS
-    </div>
-
-    <% if @project.open? %>
-      <div>
-        <% days_remaining = (@project.deadline - Time.zone.now).to_i / 1.day %>
-        <%= days_remaining %> DAYS TO GO
-      </div>
-    <% else %>
-      <div>
-        CLOSED 
-      </div>
-    <% end %>
-
-    <% if @project.description.present? %>
-      <div>
-        <span>Description:</span>
-        <%= @project.description %>
-      </div>
-    <% end %>
-
-    <div>
-      <span>Created at</span>
-      <%= display_time(@project.created_at) %>
-      <span>Latest updated at</span>
-      <%= display_time(@project.updated_at) %>
-    </div>
-  </div>
-</div>
-
-<div class="list-group">
-  <div class="list-group-item list-group-item-info">
-    Fundings
-  </div>
-
+<div class="list-group col-lg-8 col-md-8 col-sm-8 col-xs-12">
   <% if @project.fundings.any? %>
+    <div class="list-group-item disabled">
+      Total <span class="important">$<%= current_amount %></span> pledged
+    </div>
     <% @project.fundings.each do |funding| %>
       <div class="list-group-item">
-        <%= link_to funding.user.name, user_profile_path(funding.user) %> funded $<%= funding.amount %> at <%= display_time(funding.created_at) %>
+        <%= link_to funding.user.name, user_profile_path(funding.user) %> pledged <span class="important">$<%= funding.amount %></span> at <%= display_time(funding.created_at) %>
       </div>
     <% end %>
   <% else %>
-    <div class="list-group-item">No fundings now</div>
+    <div class="list-group-item disabled">No fundings now</div>
+  <% end %>
+
+  <% if @project.open? %>
+    <%= simple_form_for @funding, 
+        url: project_funding_path, 
+        defaults: {required: false} do |f| %>
+
+      <% if @funding.errors.any? %>
+        <ul class="alert alert-danger funding-errors">
+          <% @funding.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <%= f.input :amount, label: false, as: :string, wrapper_html: { class: 'input-group' } %>
+
+      <%= f.button :submit, 'Contribute', class: 'btn btn-success', id: 'funding-submit' %>
+    <% end %>
+  <% else %>
+    <h2>This project has been closed.</h2>
   <% end %>
 </div>
-
-<% if @project.open? %>
-  <%= simple_form_for @funding, 
-      url: project_funding_path, 
-      defaults: {required: false} do |f| %>
-    <%= f.error_notification %>
-
-    <%= f.input :amount, placeholder: 'Amount', label: false, as: :string %>
-
-    <%= f.button :submit, 'Contribute', class: 'btn btn-success', id: 'funding-submit' %>
-  <% end %>
-<% else %>
-  <h2>This project has been closed.</h2>
-<% end %>
-
-<% if @project.owner == current_user %>
-  <div class="operation-groups">
-    <%= link_to edit_project_path(@project.id), class: "btn btn-primary" do %>
-      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-      EDIT
-    <% end %>
-
-    <% if @project.fundings.empty? %>
-      <%= link_to project_path(@project.id), 
-          method: :delete, 
-          data: {confirm: "Are you sure to delete this project?"},
-          class: "btn btn-danger" do %>
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-        DELETE
-      <% end %>
-    <% end %>
-  </div>
-<% end %>

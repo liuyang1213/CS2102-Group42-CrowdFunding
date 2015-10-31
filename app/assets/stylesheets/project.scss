@@ -2,8 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-  background-image: image-url("cover.jpg")
+div {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 div#cover {
@@ -40,6 +41,10 @@ body {
   font-family: 'Roboto'
 }
 
+.inline {
+  display: inline-block;
+}
+
 .project-card {
   font-size: 0;
 
@@ -72,14 +77,28 @@ body {
   margin-top: 20px;
 }
 
-div.project-item {
-  width: 33%;
-  display: inline-block;
+.project-item-wrapper {
+  padding: 3px !important;
+}
+
+.project-item {
+  .caption {
+    color: #666666 !important;
+  }
+}
+
+.project-item:hover {
+  border: 1px solid #888888;
+  cursor: pointer;
+  background-color: #F8F8F8;
+  .caption {
+    color: #000000 !important;
+  }
 }
 
 .project-item-date {
   font-style: italic;
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .project-item-button {
@@ -97,4 +116,37 @@ div.project-list-title {
 
 div.operation-groups {
   margin: 10px 0;
+}
+
+.important {
+  font-weight: bold;
+}
+
+div.sidebar {
+  font-size: 14px;
+
+  .project-description {
+    width: 100%;
+  }
+}
+
+form.new_funding {
+  font-size: 0;
+  margin-top: 10px;
+
+  li, span.error {
+    font-size: 14px;
+  }
+}
+
+ul {
+    list-style-type: none;
+}
+
+.alert {
+  padding: 10px !important;
+}
+
+ul.funding-errors {
+  margin-bottom: 5px !important;
 }

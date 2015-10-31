@@ -6,60 +6,65 @@
   <% current_amount = project.current_amount %>
   <% target_amount = project.target_amount %>
   <% progress = (current_amount > target_amount ? 100 : current_amount.to_f / target_amount * 100).round(0) %>
-  <div class="thumbnail project-item">  
-    <div class="caption">
-      <div class="project-list-title">
-        <%= link_to project.name, project_path(project.id) %>
-      </div>
-
-      <div>
-        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-        By <%= link_to project.owner.name, user_profile_path(project.owner) %>
-      </div>
-
-      <div class="progress">
-        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="<%= "width: #{progress}%" %>">
-          <%= progress %>%
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="inline">
-          <div class="card-large">$<%= current_amount %></div> PLEDGED OF $<%= target_amount %> GOAL
+  <div class="project-item-wrapper col-lg-4 col-md-6 col-sm-6 col-xs-12">
+    <div class="thumbnail project-item" data-link=<%= project_path(project) %>>
+      <div class="caption">
+        <div class="project-list-title">
+          <%= project.name %>
         </div>
 
         <div class="inline">
-          <div class="card-large"><%= project.uniq_funders.length %></div> PLEDGER<%= 'S' if project.uniq_funders.length > 1 %>
+          <% if project.open? %>
+            <span class="label label-success">
+              <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+              OPEN
+            </span>
+          <% else %>
+            <span class="label label-danger">
+              <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+              CLOSED
+            </span>
+          <% end %>
         </div>
 
-        <% if project.open? %>
-          <div class="inline">
-            <% days_remaining = ((project.deadline - Time.zone.now).to_f / 1.day).ceil %>
-            <div class="card-large"><%= days_remaining %></div> DAY<%= 'S' if days_remaining > 1 %> LEFT
-          </div>
-        <% else %>
-          <div class="inline">
-            <div class="card-closed">CLOSED</div>
-          </div>
-        <% end %>
-      </div>
+        <div class="inline">
+          <span class="label label-primary">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            <%= project.owner.name %>
+          </span>
+        </div>
 
-      
-      <div class="project-item-button">
-        <% if project.open? %>
-          <%= link_to project_path(project), class: "btn btn-success" do %>
-            Contribute
-          <% end %>
-        <% else %>
-          <%= link_to project_path(project), class: "btn btn-default" do %>
-            View
-          <% end %>
-        <% end %>
-      </div>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="<%= "width: #{progress}%" %>">
+            <%= progress %>%
+          </div>
+        </div>
 
-      <div class="project-item-date">
-        <span>Created at</span>
-        <%= display_time(project.created_at) %>
+        <div>
+          <div>
+            <span class="important">$<%= current_amount %></span> PLEDGED OF <span class="important">$<%= target_amount %></span> GOAL
+          </div>
+
+          <div>
+            <span class="important"><%= project.uniq_funders.length %></span> PLEDGER<%= 'S' if project.uniq_funders.length > 1 %> 
+          </div>
+
+          <div>
+            <% if project.open? %>
+              <% days_remaining = ((project.deadline - Time.zone.now).to_f / 1.day).ceil %>
+              <span class="important"><%= days_remaining %></span> DAY<%= 'S' if days_remaining > 1 %> LEFT
+            <% else %>
+              CLOSED ON <span class="important"><%= display_time(project.deadline) %></span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="project-item-date">
+          <span>Created at</span>
+          <%= display_time(project.created_at) %>.
+          <span>Lastest updated at</span>
+          <%= display_time(project.updated_at) %>.
+        </div>
       </div>
     </div>
   </div>
