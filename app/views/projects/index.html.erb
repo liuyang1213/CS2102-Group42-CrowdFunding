@@ -6,6 +6,7 @@
   <% current_amount = project.current_amount %>
   <% target_amount = project.target_amount %>
   <% progress = (current_amount > target_amount ? 100 : current_amount.to_f / target_amount * 100).round(0) %>
+  <a href=<%= project_path(project) %>>
   <div class="project-item-wrapper col-lg-4 col-md-6 col-sm-6 col-xs-12">
     <div class="thumbnail project-item" data-link=<%= project_path(project) %>>
       <div class="caption">
@@ -28,14 +29,14 @@
         </div>
 
         <div class="inline">
-          <span class="label label-primary">
+          <span class="label label-warning">
             <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             <%= project.owner.name %>
           </span>
         </div>
 
         <div class="progress">
-          <div class="progress-bar" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="<%= "width: #{progress}%" %>">
+          <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="<%= "width: #{progress}%" %>">
             <%= progress %>%
           </div>
         </div>
@@ -68,4 +69,5 @@
       </div>
     </div>
   </div>
+  </a>
 <% end %>

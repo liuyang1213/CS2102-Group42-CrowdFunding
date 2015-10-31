@@ -1,50 +1,32 @@
 <div class="page-header">
-  <h1><%= @user.name %>'s Profile</h1>
+  <h1>User Profile</h1>
+  <h4> <%= @user.name %> &lt;<%= @user.email%>&gt;</h4>
 </div>
 
 <div class="list-group">
-  <div class="list-group-item list-group-item-info">
-    Basic Information
-  </div>
-  <div class="list-group-item">
-    Name: <%= @user.name %>
-  </div>
-  <div class="list-group-item">
-    Email: <%= @user.email %>
-  </div>
-</div>
-
-<div class="list-group">
-  <div class="list-group-item list-group-item-info">
+  <div class="list-group-item list-group-item-warning">
     Own Projects
   </div>
-
   <% if @user.projects.any? %>
     <% @user.projects.each do |project| %>
-      <div class="list-group-item">
-        <%= link_to project.name, project_path(project) %>
-      </div>
+      <a href=<%= project_path(project) %> class="list-group-item indented">
+        <%= project.name %>
+      </a>
     <% end %>
   <% else %>
-    <div class="list-group-item">No project now</div>
+    <div class="list-group-item indented">No project now</div>
   <% end %>
-</div>
 
-<div class="list-group">
-  <div class="list-group-item list-group-item-info">
-    Funding History
+  <div class="list-group-item list-group-item-warning">
+    Funding History - <span class="important">$<%= @user.total_funding %></span> in total
   </div>
-
   <% if @user.fundings.any? %>
     <% @user.fundings.each do |funding| %>
-      <div class="list-group-item">
-        Funded <%= link_to funding.project.name, project_path(funding.project) %> for $<%= funding.amount %> at <%= display_time(funding.created_at)%> 
-      </div>
+      <a href=<%= project_path(funding.project) %> class="list-group-item indented">
+        Funded <span class="important project-name"><%= funding.project.name %></span> for $<%= funding.amount %> at <%= display_time(funding.created_at)%> s
+      </a>
     <% end %>
-    <div class="list-group-item">
-        Total Funding: $<%= @user.total_funding %>
-    </div> 
   <% else %>
-    <div class="list-group-item">No fundings now</div>
+    <div class="list-group-item indented">No fundings now</div>
   <% end %>
 </div>

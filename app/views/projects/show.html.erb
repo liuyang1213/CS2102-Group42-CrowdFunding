@@ -2,7 +2,7 @@
   <h1><%= @project.name %></h1>
   <% if @project.owner == current_user %>
     <div class="operation-groups row">
-      <%= link_to edit_project_path(@project.id), class: "btn btn-primary" do %>
+      <%= link_to edit_project_path(@project.id), class: "btn btn-warning" do %>
         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
         EDIT
       <% end %>
@@ -28,7 +28,7 @@
   <div class="thumbnail">
     <div class="caption">
       <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="<%= "width: #{progress}%" %>">
+        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="<%= progress %>" aria-valuemin="0" aria-valuemax="100" style="<%= "width: #{progress}%" %>">
           <%= progress %>%
         </div>
       </div>
@@ -83,16 +83,16 @@
 
 <div class="list-group col-lg-8 col-md-8 col-sm-8 col-xs-12">
   <% if @project.fundings.any? %>
-    <div class="list-group-item disabled">
+    <div class="list-group-item list-group-item-warning">
       Total <span class="important">$<%= current_amount %></span> pledged
     </div>
     <% @project.fundings.each do |funding| %>
-      <div class="list-group-item">
+      <div class="list-group-item indented">
         <%= link_to funding.user.name, user_profile_path(funding.user) %> pledged <span class="important">$<%= funding.amount %></span> at <%= display_time(funding.created_at) %>
       </div>
     <% end %>
   <% else %>
-    <div class="list-group-item disabled">No fundings now</div>
+    <div class="list-group-item disabled">No funding now</div>
   <% end %>
 
   <% if @project.open? %>
@@ -110,7 +110,7 @@
 
       <%= f.input :amount, label: false, as: :string, wrapper_html: { class: 'input-group' } %>
 
-      <%= f.button :submit, 'Contribute', class: 'btn btn-success', id: 'funding-submit' %>
+      <%= f.button :submit, 'Contribute', class: 'btn btn-warning', id: 'funding-submit' %>
     <% end %>
   <% else %>
     <h2>This project has been closed.</h2>
