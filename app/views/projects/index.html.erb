@@ -61,10 +61,12 @@
         </div>
 
         <div class="project-item-date">
-          <span>Created at</span>
-          <%= display_time(project.created_at) %>.
-          <span>Lastest updated at</span>
-          <%= display_time(project.updated_at) %>.
+          <div>
+            Created at <%= display_time(project.created_at) %>. 
+          </div>
+          <div>
+            Lastest updated at <%= display_time(project.updated_at) %>.
+          </div>
         </div>
       </div>
     </div>
